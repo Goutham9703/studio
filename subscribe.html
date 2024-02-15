@@ -1,0 +1,130 @@
+
+<html>
+	<head>
+		
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://www.spacestyling.com/application/views/front/css/bootstrap.min.css" rel="stylesheet">
+        <head>
+     		<style>
+			.ictext {
+				font-size: 18px;
+				font-weight: bold;
+				text-align: center;
+				margin: 14px 5px;
+			}
+			#contact input{
+			    height: 36px!Important;
+                border: 1px solid #0000003d!Important;
+                margin-bottom: 9px;
+			}
+			.close_btn {
+				position: absolute;
+				right: 16px;
+				top: 5px;
+				font-size: 24px;
+				color:#ccc;
+			}
+			.enquiery_forms label {
+                font-size: 13px;
+            }
+			.mb-4{
+				margin-bottom:10px;
+			}
+			.p-0{
+				padding:0;
+			}
+		</style>
+			</head>
+	<body>
+		<div>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contact">
+		  Open modal
+		</button>
+            <div class="modal fade" id="contact">		
+				<div class="modal-dialog w100">
+					
+					<div class="modal-content col-md-12">  	  
+						<!-- Modal body -->
+						<div class="modal-body p-0">
+						    <button type="button" class="close" data-dismiss="modal">&times;</button>
+							<div class=" ">
+								<div class="row">
+									<div class="col-md-6 p-0"> 
+										<img src="https://www.spacestyling.com/application/views/front/img/02.jpg" alt="spacestyleImg" class="img-fluid" style="min-height:350px;width:100%;height:100%;"> 
+									</div>
+									<div class="col-md-6">
+										<div class="d-flex align-items-center justify-content-center chat_sec"> 
+											<div class="ictext">We'd love to here how we can help you</div>				
+										</div>
+										<!-- <span class="white text-right close_btn">&times;</span> -->
+										<div class="enquiery_forms" >
+											<form onsubmit="return false">
+												<div class="header_form">
+													<span> </span>
+												</div>
+												<div class="body_form p-3">
+													<div class="mb-4">
+														<label>User Name</label>
+														<input type="text" name="name" placeholder="Enter Your Name" class="form-control penq-name">
+													</div>
+													<div class="mb-4">
+														<label>Email</label>
+														<input type="email" name="emai" placeholder="Enter Your Email" class="form-control penq-email">
+													</div> 
+													<div class="mb-4">
+														<label>Designation </label>
+														<input type="text"  name="designation" placeholder="Enter Your Designation"  class="form-control penq-message"></textarea>
+													</div>
+												<div class="penq-return"></div>
+													<div class="mt-3 mb-3" style="margin-top:10px;">
+														<label> </label>
+														<button type="button" name="Submit"  value="Submit" onclick="penq_submit()" class="btn_send btn btn-success">Submit</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>  
+				  
+					 </div>
+				</div>
+			</div>
+			<script src="https://www.spacestyling.com/application/views/front/js/jquery-2.2.4.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script> 
+			function penq_submit(){
+			    debugger;
+				$('.penq-return').empty();
+				name = $('.penq-name').val();
+				//phone = $('.penq-phone').val();
+				email = $('.penq-email').val();
+				designation = $('.penq-message').val();
+
+				dataString = '&name=' + name + '&email=' + email + '&designation=' + designation + '&action=quotes';
+				if(name=='' || email=='' ){
+					$('.penq-return').html('<div class="alert alert-danger">All Fields are required!</div>');
+				}else{
+					$.ajax({
+						url: 'controller1.php',
+						method: 'post',
+						data: dataString,
+						cache: false,
+						success:function(data){
+							if(data === '1'){
+								$('.penq-return').html('<div class="alert alert-success">Thanks for subscribe.</div>');
+							}else{
+								$('.penq-return').html(data).show();
+							}
+						}
+					})
+				}
+			}
+			$('#contact').modal('show');
+		</script>
+		
+		
+	</body>
+</html>
